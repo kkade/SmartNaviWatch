@@ -62,7 +62,7 @@ public class MainActivity extends Activity {
                 {
                     case MessageTypes.MESSAGE_NEW_DIRECTION:
                         NewDirectionMessage msg = new NewDirectionMessage(e.getData());
-                        mTextView.setText("New direction: " + msg.getMsg());
+                        mTextView.setText("Phone message: " + msg.getMsg());
                         break;
                 }
             }

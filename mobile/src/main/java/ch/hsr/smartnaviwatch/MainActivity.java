@@ -69,7 +69,7 @@ public class MainActivity extends Activity {
             @Override
             public void onResult(NodeApi.GetConnectedNodesResult getConnectedNodesResult) {
                 NewDirectionMessage direction = new NewDirectionMessage();
-                direction.setMsg(editField.getText().toString()+"!?!");
+                direction.setMsg("\"" + editField.getText().toString()+"\"");
                 Wearable.MessageApi.sendMessage(apiClient, getConnectedNodesResult.getNodes().get(0).getId(), MessageTypes.MESSAGE_NEW_DIRECTION , direction.getBytes());
             }
         });
