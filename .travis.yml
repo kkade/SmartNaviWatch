@@ -32,5 +32,8 @@ android:
 
 script: ./gradlew build
    
+notifications:
+  slack: smart-navi-watch:aEOpYaZVURMj1eESnCcWBLHe
+   
 before_install:
   - chmod +x gradlew
