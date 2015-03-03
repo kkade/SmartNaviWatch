@@ -23,5 +23,8 @@ android:
     #- sys-img-armeabi-v7a-android-19
     #- sys-img-x86-android-17
 
+  licenses:
+    - /android-sdk-license-[0-9a-f]{8}/
+
 before_install:
   - chmod +x gradlew
