@@ -37,3 +37,13 @@ notifications:
    
 before_install:
   - chmod +x gradlew
+
+deploy:
+  provider: releases
+  api-key: "5f6138e0aa771eabe25a9c78291cd08b019d66d8"
+  file: 
+    - "mobile-release-unsigned.apk"
+    - "wear-release-unsigned.apk"
+  skip_cleanup: true
+  on:
+    tags: true
