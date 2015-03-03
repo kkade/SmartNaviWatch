@@ -30,5 +30,8 @@ android:
     - 'google-gdk-license-.+'
     - /android-sdk-license-[0-9a-f]{8}/
 
+  script:
+   - './gradlew build'
+   
 before_install:
   - chmod +x gradlew
