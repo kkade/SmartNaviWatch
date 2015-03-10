@@ -27,7 +27,4 @@ dependencies {
     wearApp project(':wear')
     compile 'com.google.android.gms:play-services:+'
     compile project(':transfer')
-    compile files('C:/Dev/SmartNaviWatch/.idea/libraries/gson-2.3.1.jar')
-    compile files('C:/Dev/SmartNaviWatch/.idea/libraries/TeletextJsonObject.jar')
-    compile files('C:/Dev/SmartNaviWatch/.idea/libraries/TeletextJsonObject-sources.jar')
 }

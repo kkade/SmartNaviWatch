@@ -8,7 +8,7 @@ import java.util.List;
 public class Results {
 
     @Expose
-    private List<Collection1> collection1 = new ArrayList<>();
+    private List<Collection1> collection1 = new ArrayList<Collection1>();
 
     /**
      *
