@@ -99,7 +99,7 @@ public class MainActivity extends Activity {
             Wearable.NodeApi.getConnectedNodes(apiClient).setResultCallback(new ResultCallback<NodeApi.GetConnectedNodesResult>() {
                 @Override
                 public void onResult(NodeApi.GetConnectedNodesResult getConnectedNodesResult) {
-                    Wearable.MessageApi.sendMessage(apiClient, getConnectedNodesResult.getNodes().get(0).getId(), MessageTypes.MESSAGE_NEW_DIRECTION , teletextBytes);
+                    Wearable.MessageApi.sendMessage(apiClient, getConnectedNodesResult.getNodes().get(0).getId(), MessageTypes.MESSAGE_TELETEXT , teletextBytes);
                 }
             });
 

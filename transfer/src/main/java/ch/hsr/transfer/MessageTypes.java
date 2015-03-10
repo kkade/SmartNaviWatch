@@ -5,4 +5,5 @@ package ch.hsr.transfer;
  */
 public final class MessageTypes {
     public static final String MESSAGE_NEW_DIRECTION = "ch/hsr/msg/nav/dir";
+    public static final String MESSAGE_TELETEXT = "ch/hsr/msg/teletext";
 }
