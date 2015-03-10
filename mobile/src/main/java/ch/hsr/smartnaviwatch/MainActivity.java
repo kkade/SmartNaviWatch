@@ -11,6 +11,7 @@ package ch.hsr.smartnaviwatch;
 // die emulatoren benutzt werden. Damit ist einfaches debuggen möglich.
 
 import android.app.Activity;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -19,10 +20,16 @@ import android.widget.EditText;
 
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.common.api.ResultCallback;
-import com.google.android.gms.wearable.MessageApi;
-import com.google.android.gms.wearable.MessageEvent;
 import com.google.android.gms.wearable.NodeApi;
 import com.google.android.gms.wearable.Wearable;
+import com.google.gson.Gson;
+
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
+import java.io.ObjectOutput;
+import java.io.ObjectOutputStream;
+
+import ch.hsr.smartnaviwatch.TeletextJsonObject_sources.TeletextJsonObject;
 import ch.hsr.transfer.*;
 
 public class MainActivity extends Activity {
@@ -74,5 +81,56 @@ public class MainActivity extends Activity {
             }
         });
 
+    }
+
+    public void sendTeletextAsync(View v){
+        new HttpAsyncTask().execute("https://www.kimonolabs.com/api/9dkfliuo?apikey=ZvwdICqVdBJuMCpGO754fxrHusXPZyxc");
+    }
+
+    public void sendTeletext(TeletextJsonObject teletextObj)
+    {
+        ByteArrayOutputStream bos = new ByteArrayOutputStream();
+        ObjectOutput out = null;
+        try {
+            out = new ObjectOutputStream(bos);
+            out.writeObject(teletextObj.getResults().getCollection1());
+            final byte[] teletextBytes = bos.toByteArray();
+
+            Wearable.NodeApi.getConnectedNodes(apiClient).setResultCallback(new ResultCallback<NodeApi.GetConnectedNodesResult>() {
+                @Override
+                public void onResult(NodeApi.GetConnectedNodesResult getConnectedNodesResult) {
+                    Wearable.MessageApi.sendMessage(apiClient, getConnectedNodesResult.getNodes().get(0).getId(), MessageTypes.MESSAGE_NEW_DIRECTION , teletextBytes);
+                }
+            });
+
+        } catch (IOException e) {
+            e.getCause();
+        } finally {
+            try {
+                if (out != null) {
+                    out.close();
+                }
+            } catch (IOException ex) {
+                // ignore close exception
+            }
+            try {
+                bos.close();
+            } catch (IOException ex) {
+                // ignore close exception
+            }
+        }
+    }
+
+    public class HttpAsyncTask extends AsyncTask<String, Void, String> {
+        @Override
+        protected String doInBackground(String... urls) {
+
+            return HttpClientTeletext.GET(urls[0]);
+        }
+        // onPostExecute displays the results of the AsyncTask.
+        @Override
+        protected void onPostExecute(final String result) {
+             sendTeletext(new Gson().fromJson(result, TeletextJsonObject.class));
+        }
     }
 }

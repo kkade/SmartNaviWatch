@@ -23,8 +23,11 @@ android {
 }
 
 dependencies {
-    compile fileTree(dir: 'libs', include: ['*.jar'])
+    compile fileTree(include: ['*.jar'], dir: 'libs')
     wearApp project(':wear')
     compile 'com.google.android.gms:play-services:+'
     compile project(':transfer')
+    compile files('C:/Dev/SmartNaviWatch/.idea/libraries/gson-2.3.1.jar')
+    compile files('C:/Dev/SmartNaviWatch/.idea/libraries/TeletextJsonObject.jar')
+    compile files('C:/Dev/SmartNaviWatch/.idea/libraries/TeletextJsonObject-sources.jar')
 }
