@@ -1,6 +1,0 @@
-<resources>
-    <string name="app_name">Smart Navi Watch</string>
-
-    <string name="hello_world">Enter a text to send to the watch!</string>
-    <string name="action_settings">Settings</string>
-</resources>
