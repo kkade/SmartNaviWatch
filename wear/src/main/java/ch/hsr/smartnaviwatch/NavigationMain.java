@@ -5,11 +5,25 @@ import android.os.Bundle;
 import android.support.wearable.view.WatchViewStub;
 import android.widget.TextView;
 
-import ch.hsr.navigationmessagingapi.TestClass;
+import ch.hsr.navigationmessagingapi.IMessageListener;
+import ch.hsr.navigationmessagingapi.MessageEndPoint;
+import ch.hsr.navigationmessagingapi.NavigationMessage;
 
-public class NavigationMain extends Activity {
+public class NavigationMain extends Activity implements IMessageListener {
 
     private TextView mTextView;
+    private MessageEndPoint endPoint;
+
+    @Override
+    public void messageReceived(NavigationMessage message) {
+        final String t = message.getMessageType();
+        runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                mTextView.setText(t);
+            }
+        });
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -22,6 +36,7 @@ public class NavigationMain extends Activity {
                 mTextView = (TextView) stub.findViewById(R.id.text);
             }
         });
-        TestClass d;
+        endPoint=new MessageEndPoint(getApplicationContext());
+        endPoint.addMessageListener(this);
     }
 }
