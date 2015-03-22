@@ -1,41 +1,82 @@
 package ch.hsr.navigationmessagingapi.services;
 
-import android.app.Service;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.content.ServiceConnection;
 
 import android.os.Bundle;
+import android.os.Handler;
 import android.os.IBinder;
 import android.os.Message;
 import android.os.Messenger;
 import android.os.RemoteException;
+import android.util.Log;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import ch.hsr.navigationmessagingapi.IMessageListener;
 import ch.hsr.navigationmessagingapi.NavigationMessage;
 
 public class NavigationServiceConnector implements ServiceConnection {
-    private ServiceConnection sConn;
+    private Messenger outgoingMessages;
+    private Messenger incomingMessages;
+    private List<IMessageListener> listeners;
 
-    private Messenger messenger;
+    private class IncomingHandler extends Handler {
+        @Override
+        public void handleMessage(Message msg) {
+            int type = msg.what;
+            switch(type)
+            {
+                case ServiceMessageTypes.MessageReceived:
+                    relayNavigationMessageToListeners(msg);
+                    break;
+                default:
+                    super.handleMessage(msg);
+            }
+        }
+    }
+
+    private void relayNavigationMessageToListeners(Message msg) {
+        Bundle b = msg.getData();
+        NavigationMessage out = new NavigationMessage();
+        out.setMessageType(b.getString(ServiceDataKeys.MessagePath));
+        out.fillPayloadFrom(b.getByteArray(ServiceDataKeys.Payload));
+        for(IMessageListener l : listeners) {
+            l.messageReceived(out);
+        }
+    }
 
     public boolean isServiceConnected(){
-        return messenger != null;
+        return outgoingMessages != null;
     }
 
     @Override
     public void onServiceDisconnected(ComponentName name) {
-        messenger = null;
+        outgoingMessages = null;
     }
 
     @Override
     public void onServiceConnected(ComponentName name, IBinder service) {
         // remember connection
-        messenger = new Messenger(service);
+        outgoingMessages = new Messenger(service);
+
+        // receiving messenger for incoming messages
+        incomingMessages = new Messenger(new IncomingHandler());
+
+        // Register as listener to make sure no listeners were missed before
+        // the service was connected
+        if (listeners.size() >= 0) {
+            RegisterAsListener();
+        }
     }
 
     public NavigationServiceConnector(Context ctx)
     {
+        listeners = new ArrayList<IMessageListener>();
+
         // look for service and bind it
         // TODO: Error message if service not found
         Intent serviceIntent = new Intent();
@@ -56,9 +97,37 @@ public class NavigationServiceConnector implements ServiceConnection {
         sendAndForget(envelope);
     }
 
+    public void addMessageListener(IMessageListener l) {
+        if(!listeners.contains(l)) listeners.add(l);
+
+        if (listeners.size() >= 0) {
+            RegisterAsListener();
+        }
+    }
+
+    private void RegisterAsListener() {
+        Message m = Message.obtain(null, ServiceMessageTypes.RegisterListener);
+        m.replyTo = incomingMessages;
+        sendAndForget(m);
+    }
+
+    public void removeMessageListener(IMessageListener l) {
+        listeners.remove(l);
+
+        if (listeners.size() == 0) {
+            DeRegisterAsListener();
+        }
+    }
+
+    private void DeRegisterAsListener() {
+        Message m = Message.obtain(null, ServiceMessageTypes.RemoveListener);
+        m.replyTo = incomingMessages;
+        sendAndForget(m);
+    }
+
     private void sendAndForget(Message m) {
         try {
-            messenger.send(m);
+            outgoingMessages.send(m);
         } catch (RemoteException e) {} // we don't really care if every single message is sent out
     }
 }

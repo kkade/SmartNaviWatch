@@ -3,6 +3,7 @@ package ch.hsr.smartnaviwatch;
 import android.app.Activity;
 import android.os.Bundle;
 import android.support.wearable.view.WatchViewStub;
+import android.view.View;
 import android.widget.TextView;
 
 import ch.hsr.navigationmessagingapi.IMessageListener;
@@ -38,5 +39,12 @@ public class NavigationMain extends Activity implements IMessageListener {
         });
         endPoint=new MessageEndPoint(getApplicationContext());
         endPoint.addMessageListener(this);
+    }
+
+    public void sendTestMessage(View view) {
+        NavigationMessage msg = new NavigationMessage();
+        msg.setMessageType("/yeah/backwards/msg");
+        msg.setPayload(new Integer(3));
+        endPoint.sendMessage(msg);
     }
 }
