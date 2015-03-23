@@ -41,9 +41,8 @@ public class NavigationServiceConnector implements ServiceConnection {
 
     private void relayNavigationMessageToListeners(Message msg) {
         Bundle b = msg.getData();
-        NavigationMessage out = new NavigationMessage();
-        out.setMessageType(b.getString(ServiceDataKeys.MessagePath));
-        out.fillPayloadFrom(b.getByteArray(ServiceDataKeys.Payload));
+        NavigationMessage out = NavigationMessage.create(b.getString(ServiceDataKeys.MessagePath), b.getByteArray(ServiceDataKeys.Payload));
+
         for(IMessageListener l : listeners) {
             l.messageReceived(out);
         }

@@ -10,6 +10,8 @@ import java.io.Serializable;
 public class NavigationMessage implements Serializable{
     protected String messageType;
 
+    private NavigationMessage() {}
+
     public Object getPayload() {
         return payload;
     }
@@ -68,5 +70,25 @@ public class NavigationMessage implements Serializable{
 
     public void setMessageType(String messageType) {
         this.messageType = messageType;
+    }
+
+    public static NavigationMessage create(String messageType, Object payload) {
+        NavigationMessage msg = new NavigationMessage();
+        msg.setMessageType(messageType);
+        msg.setPayload(payload);
+        return msg;
+    }
+
+    public static NavigationMessage create(String messageType) {
+        NavigationMessage msg = new NavigationMessage();
+        msg.setMessageType(messageType);
+        return msg;
+    }
+
+    public static NavigationMessage create(String messageType, byte[] payload) {
+        NavigationMessage msg = new NavigationMessage();
+        msg.setMessageType(messageType);
+        msg.fillPayloadFrom(payload);
+        return msg;
     }
 }

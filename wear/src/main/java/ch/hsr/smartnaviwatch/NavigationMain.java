@@ -42,9 +42,8 @@ public class NavigationMain extends Activity implements IMessageListener {
     }
 
     public void sendTestMessage(View view) {
-        NavigationMessage msg = new NavigationMessage();
-        msg.setMessageType("/yeah/backwards/msg");
-        msg.setPayload(new Integer(3));
+        NavigationMessage msg = NavigationMessage.create("/yeah/backwards/msg", new Integer(3));
+
         endPoint.sendMessage(msg);
     }
 }

@@ -116,9 +116,7 @@ public class MessageEndPoint implements GoogleApiClient.ConnectionCallbacks
 
     @Override
     public void onMessageReceived(MessageEvent messageEvent) {
-        NavigationMessage msg = new NavigationMessage();
-        msg.setMessageType(messageEvent.getPath());
-        msg.fillPayloadFrom(messageEvent.getData());
+        NavigationMessage msg = NavigationMessage.create(messageEvent.getPath(), messageEvent.getData());
 
         for(IMessageListener l : messageListeners) {
             l.messageReceived(msg);

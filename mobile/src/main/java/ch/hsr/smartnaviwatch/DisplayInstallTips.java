@@ -22,9 +22,8 @@ public class DisplayInstallTips extends ActionBarActivity {
     }
 
     public void sendTestMessage(View view) {
-        NavigationMessage msg = new NavigationMessage();
-        msg.setMessageType("/navigation/turn/mute");
-        msg.setPayload(new Integer(3));
+        NavigationMessage msg = NavigationMessage.create("/navigation/turn/mute", new Integer(3));
+
         endPoint.sendMessage(msg);
     }
 
