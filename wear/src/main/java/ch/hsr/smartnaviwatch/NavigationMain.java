@@ -2,6 +2,7 @@ package ch.hsr.smartnaviwatch;
 
 import android.app.Activity;
 import android.os.Bundle;
+import android.os.Vibrator;
 import android.support.wearable.view.WatchViewStub;
 import android.view.View;
 import android.widget.TextView;
@@ -39,6 +40,12 @@ public class NavigationMain extends Activity implements IMessageListener {
         });
         endPoint=new MessageEndPoint(getApplicationContext());
         endPoint.addMessageListener(this);
+
+        Vibrator vibrator = (Vibrator) getSystemService(VIBRATOR_SERVICE);
+        long[] vibrationPattern = {0, 500, 50, 300};
+        //-1 - don't repeat
+        final int indexInPatternToRepeat = -1;
+        vibrator.vibrate(vibrationPattern, indexInPatternToRepeat);
     }
 
     public void sendTestMessage(View view) {
