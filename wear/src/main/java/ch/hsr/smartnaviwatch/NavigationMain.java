@@ -10,6 +10,7 @@ import android.widget.TextView;
 import ch.hsr.navigationmessagingapi.IMessageListener;
 import ch.hsr.navigationmessagingapi.MessageEndPoint;
 import ch.hsr.navigationmessagingapi.NavigationMessage;
+import ch.hsr.navigationmessagingapi.services.StartupOnMessageService;
 
 public class NavigationMain extends Activity implements IMessageListener {
 
@@ -18,13 +19,15 @@ public class NavigationMain extends Activity implements IMessageListener {
 
     @Override
     public void messageReceived(NavigationMessage message) {
-        final String t = message.getMessageType();
-        runOnUiThread(new Runnable() {
-            @Override
-            public void run() {
-                mTextView.setText(t);
-            }
-        });
+        if (message!=null) {
+            final String t = message.getMessageType();
+            runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    mTextView.setText(t);
+                }
+            });
+        }
     }
 
     @Override
@@ -32,14 +35,17 @@ public class NavigationMain extends Activity implements IMessageListener {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_navigation_main);
         final WatchViewStub stub = (WatchViewStub) findViewById(R.id.watch_view_stub);
+        final NavigationMessage initialMessage = StartupOnMessageService.getMessageFromIntent(getIntent());
         stub.setOnLayoutInflatedListener(new WatchViewStub.OnLayoutInflatedListener() {
             @Override
             public void onLayoutInflated(WatchViewStub stub) {
                 mTextView = (TextView) stub.findViewById(R.id.text);
+                messageReceived(initialMessage);
             }
         });
         endPoint=new MessageEndPoint(getApplicationContext());
         endPoint.addMessageListener(this);
+
 
         Vibrator vibrator = (Vibrator) getSystemService(VIBRATOR_SERVICE);
         long[] vibrationPattern = {0, 500, 50, 300};
