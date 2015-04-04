@@ -1,10 +1,6 @@
 package ch.hsr.navigationmessagingapi;
 
-import android.content.ComponentName;
 import android.content.Context;
-import android.content.Intent;
-import android.content.pm.PackageManager;
-import android.content.pm.ResolveInfo;
 import android.os.Bundle;
 
 import com.google.android.gms.common.ConnectionResult;
@@ -24,16 +20,6 @@ public class MessageEndPoint implements GoogleApiClient.ConnectionCallbacks
                                       , GoogleApiClient.OnConnectionFailedListener
                                       , MessageApi.MessageListener
 {
-// TODO:http://toastdroid.com/2014/08/18/messageapi-simple-conversations-with-android-wear/
-    // Try registering
-
-    /**
-     * <service android:name=".DataLayerListenerService">
-     <intent-filter>
-     <action android:name="com.google.android.gms.wearable.BIND_LISTENER" />
-     </intent-filter>
-     </service>
-    */
     private GoogleApiClient messageApi;
     private List<IConnectionStateChanged> connectionListeners;
     private List<IMessageListener> messageListeners;
@@ -76,6 +62,8 @@ public class MessageEndPoint implements GoogleApiClient.ConnectionCallbacks
     }
 
     public void sendMessageRaw(String path, byte[] data) {
+        if (!isApiReady()) return;
+
         Wearable.MessageApi.sendMessage(messageApi, wearNode.getId(), path, data);
     }
 
