@@ -1,10 +1,57 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<GridLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
     android:layout_height="match_parent" tools:context=".NavigationMain"
-    tools:deviceIds="wear_round">
+    tools:deviceIds="wear_round"
+    android:keepScreenOn="true"
+    android:weightSum="1"
+    android:rowCount="6"
+    android:columnCount="2"
+    android:background="@color/card_default_background">
 
-    <TextView android:id="@+id/text" android:layout_width="wrap_content"
-        android:layout_height="wrap_content" android:layout_centerHorizontal="true"
-        android:layout_centerVertical="true" android:text="@string/hello_round" />
-</RelativeLayout>
+    <TextClock
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/textClock"
+        android:layout_gravity="center_horizontal"
+        android:layout_row="0"
+        android:layout_columnSpan="2"
+        android:textColor="@color/black"
+        android:layout_marginTop="20dp"
+        android:textSize="20sp" />
+
+    <ImageView
+        android:layout_width="52dp"
+        android:layout_height="52dp"
+        android:id="@+id/imageView"
+        android:layout_row="1"
+        android:layout_rowSpan="2"
+        android:layout_column="0"
+        android:contentDescription="Current Location"
+        android:src="@mipmap/current_location"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="10dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:text="Aktueller Standort:"
+        android:id="@+id/textView"
+        android:layout_row="1"
+        android:layout_column="1"
+        android:layout_marginTop="15dp"
+        android:layout_marginLeft="5dp"
+        android:textColor="@color/black" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="Sample St."
+        android:id="@+id/textView2"
+        android:layout_row="2"
+        android:layout_column="1"
+        android:layout_marginLeft="5dp"
+        android:textColor="@color/black" />
+</GridLayout>
