@@ -9,26 +9,44 @@ public class MapPolygon {
     private int type;
     private Point[]   outerBounds;
     private Point[][] innerBounds;
-    private int outerX = Integer.MAX_VALUE;
-    private int outerY = Integer.MAX_VALUE;
+    private int outerXMin = Integer.MAX_VALUE;
+    private int outerYMin = Integer.MAX_VALUE;
+
+    private int outerXMax = Integer.MIN_VALUE;
+    private int outerYMax= Integer.MIN_VALUE;
 
     public MapPolygon(int type, Point[] outerBounds, Point[][] innerBounds) {
         this.type = type;
         this.outerBounds = outerBounds;
         this.innerBounds = innerBounds;
 
+        recalculateBounds(outerBounds);
+    }
+
+    private void recalculateBounds(Point[] outerBounds) {
         for(int i = 0; i < outerBounds.length; i++) {
-            outerX = Math.min(outerX, outerBounds[i].x);
-            outerY = Math.min(outerX, outerBounds[i].x);
+            outerXMin = Math.min(outerXMin, outerBounds[i].x);
+            outerYMin = Math.min(outerYMin, outerBounds[i].y);
+
+            outerXMax = Math.max(outerXMax, outerBounds[i].x);
+            outerYMax = Math.max(outerYMax, outerBounds[i].y);
         }
     }
 
-    public int getOuterX() {
-        return outerX;
+    public int getOuterXMin() {
+        return outerXMin;
     }
 
-    public int getOuterY() {
-        return outerY;
+    public int getOuterYMin() {
+        return outerYMin;
+    }
+
+    public int getOuterXMax() {
+        return outerXMax;
+    }
+
+    public int getOuterYMax() {
+        return outerYMax;
     }
 
     public void offset(int deltaX, int deltaY) {
