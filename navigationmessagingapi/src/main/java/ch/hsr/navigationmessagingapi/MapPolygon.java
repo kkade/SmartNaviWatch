@@ -1,21 +1,21 @@
 package ch.hsr.navigationmessagingapi;
 
-import android.graphics.Point;
+import java.io.Serializable;
 
 /**
  * Represents a polygon on the map
  */
-public class MapPolygon {
+public class MapPolygon implements Serializable{
     private int type;
-    private Point[]   outerBounds;
-    private Point[][] innerBounds;
+    private PolygonPoint[]   outerBounds;
+    private PolygonPoint[][] innerBounds;
     private int outerXMin = Integer.MAX_VALUE;
     private int outerYMin = Integer.MAX_VALUE;
 
     private int outerXMax = Integer.MIN_VALUE;
     private int outerYMax= Integer.MIN_VALUE;
 
-    public MapPolygon(int type, Point[] outerBounds, Point[][] innerBounds) {
+    public MapPolygon(int type, PolygonPoint[] outerBounds, PolygonPoint[][] innerBounds) {
         this.type = type;
         this.outerBounds = outerBounds;
         this.innerBounds = innerBounds;
@@ -23,7 +23,7 @@ public class MapPolygon {
         recalculateBounds(outerBounds);
     }
 
-    private void recalculateBounds(Point[] outerBounds) {
+    private void recalculateBounds(PolygonPoint[] outerBounds) {
         for(int i = 0; i < outerBounds.length; i++) {
             outerXMin = Math.min(outerXMin, outerBounds[i].x);
             outerYMin = Math.min(outerYMin, outerBounds[i].y);

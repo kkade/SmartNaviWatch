@@ -6,6 +6,7 @@ import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
 import android.os.Vibrator;
 import android.support.wearable.view.WatchViewStub;
+import android.util.Log;
 import android.view.Display;
 import android.view.View;
 import android.view.animation.Animation;
@@ -15,8 +16,12 @@ import android.widget.GridLayout;
 import android.widget.TextView;
 import android.widget.ViewFlipper;
 
+import java.util.HashMap;
+
+import ch.hsr.navigationmessagingapi.IConnectionStateChanged;
 import ch.hsr.navigationmessagingapi.IMessageListener;
 import ch.hsr.navigationmessagingapi.MapPolygonCollection;
+import ch.hsr.navigationmessagingapi.MessageDataKeys;
 import ch.hsr.navigationmessagingapi.MessageEndPoint;
 import ch.hsr.navigationmessagingapi.NavigationMessage;
 import ch.hsr.navigationmessagingapi.MessageTypes;
@@ -45,8 +50,12 @@ public class NavigationMain extends Activity implements IMessageListener {
                     runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
-                           // currentPosition.setText(message.getPayload());
-                            //MapRenderer.render(new MapPolygonCollection());
+                            Display display = getWindowManager().getDefaultDisplay();
+                            Point size = new Point();
+                            display.getSize(size);
+                            HashMap<String, Object> values = (HashMap<String, Object>) message.getPayload();
+                            MapPolygonCollection mapData = (MapPolygonCollection) values.get(MessageDataKeys.MapPolygonData);
+                            viewFlipper.setBackground(new BitmapDrawable(getResources(), MapRenderer.render(mapData, size.x, size.y)));
                         }
                     });
                     break;
@@ -87,7 +96,7 @@ public class NavigationMain extends Activity implements IMessageListener {
                 Display display = getWindowManager().getDefaultDisplay();
                 Point size = new Point();
                 display.getSize(size);
-                viewFlipper.setBackground(new BitmapDrawable(getResources() ,MapRenderer.render(new MapPolygonCollection(), size.x, size.y)));
+                //viewFlipper.setBackground(new BitmapDrawable(getResources() , MapRenderer.render(new MapPolygonCollection(), size.x, size.y)));
 
                 //buttonStartNav.setOnClickListener(new View.OnClickListener() {
                   //  @Override
@@ -95,21 +104,29 @@ public class NavigationMain extends Activity implements IMessageListener {
                      //   viewFlipper.showNext();
                    /// }
                 //});
+                if(initialMessage == null) {
+                    endPoint.addConnectionListener(new IConnectionStateChanged() {
+                        @Override
+                        public void onConnectionChanged(MessageEndPoint endPoint) {
+                            sendTestMessage();
+                        }
+                    });
+                }
             }
         });
         endPoint=new MessageEndPoint(getApplicationContext());
         endPoint.addMessageListener(this);
 
-        Vibrator vibrator = (Vibrator) getSystemService(VIBRATOR_SERVICE);
-        long[] vibrationPattern = {0, 500, 50, 300};
+        //Vibrator vibrator = (Vibrator) getSystemService(VIBRATOR_SERVICE);
+        //long[] vibrationPattern = {0, 500, 50, 300};
         //-1 - don't repeat
-        final int indexInPatternToRepeat = -1;
-        vibrator.vibrate(vibrationPattern, indexInPatternToRepeat);
+        //final int indexInPatternToRepeat = -1;
+        //vibrator.vibrate(vibrationPattern, indexInPatternToRepeat);
+
     }
 
-    public void sendTestMessage(View view) {
-        NavigationMessage msg = NavigationMessage.create("/yeah/backwards/msg", new Integer(3));
-
+    public void sendTestMessage() {
+        NavigationMessage msg = NavigationMessage.create(MessageTypes.PositionRequest, new Integer(1));
         endPoint.sendMessage(msg);
     }
 }

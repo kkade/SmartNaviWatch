@@ -1,12 +1,13 @@
 package ch.hsr.navigationmessagingapi;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
 /**
  * Represents a list of polygons on the map
  */
-public class MapPolygonCollection {
+public class MapPolygonCollection implements Serializable {
     private List<MapPolygon> polygons = new ArrayList<MapPolygon>();
 
     private int outerXMin = Integer.MAX_VALUE;
