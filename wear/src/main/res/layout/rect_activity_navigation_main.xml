@@ -70,7 +70,7 @@
                 android:textColor="@color/black" />
 
             <TextView
-                android:id="@+id/messageText"
+                android:id="@+id/currentPosition"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_column="1"
@@ -79,17 +79,6 @@
                 android:text="Sample St."
                 android:textAppearance="?android:attr/textAppearanceMedium"
                 android:textColor="@color/black" />
-
-            <Button
-                style="?android:attr/buttonStyleSmall"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Navigation starten"
-                android:id="@+id/startNav"
-                android:layout_row="3"
-                android:layout_columnSpan="2"
-                android:layout_gravity="center_horizontal"
-                android:layout_marginTop="15dp"/>
 
 
         </GridLayout>

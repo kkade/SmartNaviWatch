@@ -71,7 +71,7 @@
                 android:textColor="@color/black" />
 
             <TextView
-                android:id="@+id/messageText"
+                android:id="@+id/currentPosition"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_column="1"

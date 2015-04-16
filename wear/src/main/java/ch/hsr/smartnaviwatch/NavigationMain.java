@@ -1,19 +1,25 @@
 package ch.hsr.smartnaviwatch;
 
 import android.app.Activity;
+import android.graphics.Point;
+import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
 import android.os.Vibrator;
 import android.support.wearable.view.WatchViewStub;
+import android.view.Display;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.Button;
+import android.widget.GridLayout;
 import android.widget.TextView;
 import android.widget.ViewFlipper;
 
 import ch.hsr.navigationmessagingapi.IMessageListener;
+import ch.hsr.navigationmessagingapi.MapPolygonCollection;
 import ch.hsr.navigationmessagingapi.MessageEndPoint;
 import ch.hsr.navigationmessagingapi.NavigationMessage;
+import ch.hsr.navigationmessagingapi.MessageTypes;
 import ch.hsr.navigationmessagingapi.services.StartupOnMessageService;
 
 public class NavigationMain extends Activity implements IMessageListener {
@@ -21,19 +27,36 @@ public class NavigationMain extends Activity implements IMessageListener {
     private Button buttonStartNav;
     private ViewFlipper viewFlipper;
     private Animation slide_in_left, slide_out_right;
-    private TextView messageText;
+    private TextView currentPosition;
+    private GridLayout layoutMap;
     private MessageEndPoint endPoint;
 
     @Override
-    public void messageReceived(NavigationMessage message) {
+    public void messageReceived(final NavigationMessage message) {
         if (message!=null) {
-            final String t = message.getMessageType();
-            runOnUiThread(new Runnable() {
-                @Override
-                public void run() {
-                    messageText.setText(t);
-                }
-            });
+            switch (message.getMessageType()) {
+                case MessageTypes.NewRouteMessage:
+
+                    break;
+                case MessageTypes.NextStepMessage:
+
+                    break;
+                case MessageTypes.PositionMessage:
+                    runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                           // currentPosition.setText(message.getPayload());
+                            //MapRenderer.render(new MapPolygonCollection());
+                        }
+                    });
+                    break;
+                case MessageTypes.CancellationMessage:
+
+                    break;
+                default:
+
+
+            }
         }
     }
 
@@ -54,19 +77,24 @@ public class NavigationMain extends Activity implements IMessageListener {
             public void onLayoutInflated(WatchViewStub stub) {
                 messageReceived(initialMessage);
 
-                messageText = (TextView)stub.findViewById(R.id.messageText);
-                buttonStartNav = (Button)stub.findViewById(R.id.startNav);
+                currentPosition = (TextView)stub.findViewById(R.id.currentPosition);
+                //buttonStartNav = (Button)stub.findViewById(R.id.startNav);
                 viewFlipper = (ViewFlipper)stub.findViewById(R.id.viewFlipper);
 
                 viewFlipper.setInAnimation(slide_in_left);
                 viewFlipper.setOutAnimation(slide_out_right);
 
-                buttonStartNav.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View arg0) {
-                        viewFlipper.showNext();
-                    }
-                });
+                Display display = getWindowManager().getDefaultDisplay();
+                Point size = new Point();
+                display.getSize(size);
+                viewFlipper.setBackground(new BitmapDrawable(getResources() ,MapRenderer.render(new MapPolygonCollection(), size.x, size.y)));
+
+                //buttonStartNav.setOnClickListener(new View.OnClickListener() {
+                  //  @Override
+                   // public void onClick(View arg0) {
+                     //   viewFlipper.showNext();
+                   /// }
+                //});
             }
         });
         endPoint=new MessageEndPoint(getApplicationContext());
