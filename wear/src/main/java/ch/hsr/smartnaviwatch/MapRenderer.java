@@ -65,7 +65,7 @@ public class MapRenderer {
 
     private static Paint getPaintByType(MapPolygonTypes type) {
         Paint linePaint = new Paint();
-        Log.d("dddd", ""+type);
+
         switch (type) {
             case ROAD_FOOTWAY:
                 linePaint.setColor(Color.GRAY);
@@ -74,9 +74,20 @@ public class MapRenderer {
                 linePaint.setStrokeWidth(2);
                 break;
             case ROAD_RESIDENTIAL:
+            case ROAD_DEFAULT:
                 linePaint.setColor(Color.WHITE);
                 linePaint.setStyle(Paint.Style.STROKE);
                 linePaint.setStrokeWidth(5);
+                break;
+            case ROAD_TERTIARY:
+                linePaint.setColor(Color.LTGRAY);
+                linePaint.setStyle(Paint.Style.STROKE);
+                linePaint.setStrokeWidth(6);
+                break;
+            case ROAD_SECONDARY:
+                linePaint.setColor(Color.rgb(219,167,9));
+                linePaint.setStyle(Paint.Style.STROKE);
+                linePaint.setStrokeWidth(10);
                 break;
             case ROAD_MOTORWAY:
                 linePaint.setColor(Color.WHITE);
@@ -84,7 +95,7 @@ public class MapRenderer {
                 linePaint.setStrokeWidth(20);
                 break;
             case BUILDING:
-                linePaint.setColor(Color.rgb(152,165,122));
+                linePaint.setColor(Color.rgb(100,100,80));
                 linePaint.setStyle(Paint.Style.FILL);
                 break;
         }
