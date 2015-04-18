@@ -16,6 +16,16 @@ public class MapPolygonCollection implements Serializable {
     private int outerXMax = Integer.MIN_VALUE;
     private int outerYMax = Integer.MIN_VALUE;
 
+    private PolygonPoint userPosition;
+
+    public PolygonPoint getUserPosition() {
+        return userPosition;
+    }
+
+    public void setUserPosition(PolygonPoint userPosition) {
+        this.userPosition = userPosition;
+    }
+
     public int getOuterXMin() {
         return outerXMin;
     }
@@ -42,13 +52,13 @@ public class MapPolygonCollection implements Serializable {
     }
 
     /**
-     * Makes the polygon points fit inside a bounding rectangle with the origin 0
+     * Origin around the map center
      */
     public void normalize() {
         if(polygons.size() == 0) return;
 
         for(MapPolygon poly : polygons) {
-            poly.offset(-outerXMin, -outerYMin);
+            poly.offset(-userPosition.x, -userPosition.y);
         }
 
         recalcBounds();
@@ -69,4 +79,9 @@ public class MapPolygonCollection implements Serializable {
             outerYMax = Math.max(outerYMax, p.getOuterYMax());
         }
     }
+
+    public List<MapPolygon> getPolygons() {
+        return polygons;
+    }
+
 }

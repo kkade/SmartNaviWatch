@@ -6,7 +6,7 @@ import java.io.Serializable;
  * Represents a polygon on the map
  */
 public class MapPolygon implements Serializable{
-    private int type;
+    private MapPolygonTypes type;
     private PolygonPoint[]   outerBounds;
     private PolygonPoint[][] innerBounds;
     private int outerXMin = Integer.MAX_VALUE;
@@ -14,16 +14,29 @@ public class MapPolygon implements Serializable{
 
     private int outerXMax = Integer.MIN_VALUE;
     private int outerYMax= Integer.MIN_VALUE;
+    private String name;
 
-    public MapPolygon(int type, PolygonPoint[] outerBounds, PolygonPoint[][] innerBounds) {
+    public MapPolygonTypes getType() {
+        return type;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public MapPolygon(MapPolygonTypes type, PolygonPoint[] outerBounds, PolygonPoint[][] innerBounds) {
         this.type = type;
         this.outerBounds = outerBounds;
         this.innerBounds = innerBounds;
 
-        recalculateBounds(outerBounds);
+        recalculateBounds();
     }
 
-    private void recalculateBounds(PolygonPoint[] outerBounds) {
+    private void recalculateBounds() {
         for(int i = 0; i < outerBounds.length; i++) {
             outerXMin = Math.min(outerXMin, outerBounds[i].x);
             outerYMin = Math.min(outerYMin, outerBounds[i].y);
@@ -61,5 +74,15 @@ public class MapPolygon implements Serializable{
                 innerBounds[innerPoly][innerPoint].y += deltaY;
             }
         }
+
+        recalculateBounds();
+    }
+
+    public PolygonPoint[] getOuterBounds() {
+        return outerBounds;
+    }
+
+    public PolygonPoint[][] getInnerBounds() {
+        return innerBounds;
     }
 }
