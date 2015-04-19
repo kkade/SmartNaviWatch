@@ -70,32 +70,54 @@ public class MapRenderer {
             case ROAD_FOOTWAY:
                 linePaint.setColor(Color.GRAY);
                 linePaint.setStyle(Paint.Style.STROKE);
-                linePaint.setPathEffect(new DashPathEffect(new float[] {10,10}, 5));
+                linePaint.setPathEffect(new DashPathEffect(new float[] {5,5}, 5));
                 linePaint.setStrokeWidth(2);
+                linePaint.setStrokeCap(Paint.Cap.ROUND);
+                break;
+            case RAILWAY:
+                linePaint.setColor(Color.GRAY);
+                linePaint.setStyle(Paint.Style.STROKE);
+                linePaint.setPathEffect(new DashPathEffect(new float[] {3, 10}, 5));
+                linePaint.setStrokeWidth(5);
+                linePaint.setStrokeCap(Paint.Cap.ROUND);
                 break;
             case ROAD_RESIDENTIAL:
             case ROAD_DEFAULT:
                 linePaint.setColor(Color.WHITE);
                 linePaint.setStyle(Paint.Style.STROKE);
                 linePaint.setStrokeWidth(5);
+                linePaint.setStrokeCap(Paint.Cap.ROUND);
                 break;
             case ROAD_TERTIARY:
                 linePaint.setColor(Color.LTGRAY);
                 linePaint.setStyle(Paint.Style.STROKE);
                 linePaint.setStrokeWidth(6);
+                linePaint.setStrokeCap(Paint.Cap.ROUND);
                 break;
             case ROAD_SECONDARY:
                 linePaint.setColor(Color.rgb(219,167,9));
                 linePaint.setStyle(Paint.Style.STROKE);
                 linePaint.setStrokeWidth(10);
+                linePaint.setStrokeCap(Paint.Cap.ROUND);
+                break;
+            case ROAD_PRIMARY:
+                linePaint.setColor(Color.rgb(219,212,9));
+                linePaint.setStyle(Paint.Style.STROKE);
+                linePaint.setStrokeWidth(18);
+                linePaint.setStrokeCap(Paint.Cap.ROUND);
                 break;
             case ROAD_MOTORWAY:
-                linePaint.setColor(Color.WHITE);
+                linePaint.setColor(Color.rgb(219,113,9));
                 linePaint.setStyle(Paint.Style.STROKE);
                 linePaint.setStrokeWidth(20);
+                linePaint.setStrokeCap(Paint.Cap.ROUND);
                 break;
             case BUILDING:
                 linePaint.setColor(Color.rgb(100,100,80));
+                linePaint.setStyle(Paint.Style.FILL);
+                break;
+            case WATER:
+                linePaint.setColor(Color.rgb(132,176,216));
                 linePaint.setStyle(Paint.Style.FILL);
                 break;
         }
@@ -103,3 +125,12 @@ public class MapRenderer {
         return linePaint;
     }
 }
+
+
+
+
+
+
+
+
+

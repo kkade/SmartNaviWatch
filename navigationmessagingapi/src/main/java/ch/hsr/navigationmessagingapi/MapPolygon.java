@@ -5,7 +5,7 @@ import java.io.Serializable;
 /**
  * Represents a polygon on the map
  */
-public class MapPolygon implements Serializable{
+public class MapPolygon implements Serializable, Comparable<MapPolygon>{
     private MapPolygonTypes type;
     private PolygonPoint[]   outerBounds;
     private PolygonPoint[][] innerBounds;
@@ -84,5 +84,10 @@ public class MapPolygon implements Serializable{
 
     public PolygonPoint[][] getInnerBounds() {
         return innerBounds;
+    }
+
+    @Override
+    public int compareTo(MapPolygon another) {
+        return -Integer.compare(this.type.ordinal(), another.type.ordinal());
     }
 }

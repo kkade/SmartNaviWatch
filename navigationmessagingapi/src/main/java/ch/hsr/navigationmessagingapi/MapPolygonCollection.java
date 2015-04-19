@@ -61,6 +61,9 @@ public class MapPolygonCollection implements Serializable {
             poly.offset(-userPosition.x, -userPosition.y);
         }
 
+        userPosition.x = 0;
+        userPosition.y = 0;
+
         recalcBounds();
     }
 
