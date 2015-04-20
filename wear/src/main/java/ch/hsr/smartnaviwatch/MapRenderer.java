@@ -112,6 +112,12 @@ public class MapRenderer {
                 linePaint.setStrokeWidth(20);
                 linePaint.setStrokeCap(Paint.Cap.ROUND);
                 break;
+            case ROUTE_PATH:
+                linePaint.setColor(Color.argb(100,219,113,9));
+                linePaint.setStyle(Paint.Style.STROKE);
+                linePaint.setStrokeWidth(23);
+                linePaint.setStrokeCap(Paint.Cap.ROUND);
+                break;
             case BUILDING:
                 linePaint.setColor(Color.rgb(100,100,80));
                 linePaint.setStyle(Paint.Style.FILL);

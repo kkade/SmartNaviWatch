@@ -4,6 +4,7 @@ import java.io.Serializable;
 
 public enum MapPolygonTypes implements Serializable{
     UNKNOWN,
+    ROUTE_PATH,
     ROAD_MOTORWAY,
     ROAD_PRIMARY,
     ROAD_SECONDARY,
