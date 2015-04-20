@@ -18,6 +18,25 @@ public class MapPolygonCollection implements Serializable {
 
     private PolygonPoint userPosition;
 
+    public PolygonPoint getTopLeftViewRange() {
+        return topLeftViewRange;
+    }
+
+    public void setTopLeftViewRange(PolygonPoint topLeftViewRange) {
+        this.topLeftViewRange = topLeftViewRange;
+    }
+
+    public PolygonPoint getBottomRightViewRange() {
+        return bottomRightViewRange;
+    }
+
+    public void setBottomRightViewRange(PolygonPoint bottomRightViewRange) {
+        this.bottomRightViewRange = bottomRightViewRange;
+    }
+
+    private PolygonPoint topLeftViewRange;
+    private PolygonPoint bottomRightViewRange;
+
     public PolygonPoint getUserPosition() {
         return userPosition;
     }
@@ -60,6 +79,12 @@ public class MapPolygonCollection implements Serializable {
         for(MapPolygon poly : polygons) {
             poly.offset(-userPosition.x, -userPosition.y);
         }
+
+        topLeftViewRange.x -= userPosition.x;
+        topLeftViewRange.y -= userPosition.y;
+
+        bottomRightViewRange.x -= userPosition.x;
+        bottomRightViewRange.y -= userPosition.y;
 
         userPosition.x = 0;
         userPosition.y = 0;
