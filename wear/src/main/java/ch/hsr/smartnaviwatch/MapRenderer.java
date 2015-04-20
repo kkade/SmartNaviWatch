@@ -26,13 +26,11 @@ public class MapRenderer {
         canvas.drawRect(0,0,width, height, backgroundPaint);
 
         // Determine uniform scaling based on smaller view size
-        float scaling;
-        if (map.getTopLeftViewRange().x - map.getBottomRightViewRange().x < map.getTopLeftViewRange().y - map.getBottomRightViewRange().y) {
-            scaling = (float)width / (map.getTopLeftViewRange().x - map.getBottomRightViewRange().x);
-        }
-        else {
-            scaling = (float)height / (map.getTopLeftViewRange().y - map.getBottomRightViewRange().y);
-        }
+        float deltaX = map.getBottomRightViewRange().x - map.getTopLeftViewRange().x ;
+        float deltaY = map.getBottomRightViewRange().y - map.getTopLeftViewRange().y;
+        float scalingX = (float)width / deltaX;
+        float scalingY = (float)height / deltaY;
+        float scaling = Math.min(scalingX, scalingY);
 
         float offsetX = width / 2f;
         float offsetY = height / 2f;
