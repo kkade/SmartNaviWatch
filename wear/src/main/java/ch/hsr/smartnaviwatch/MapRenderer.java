@@ -17,7 +17,7 @@ public class MapRenderer {
 
     public static Bitmap render(MapPolygonCollection map, int width, int height){
         Bitmap bmp = Bitmap.createBitmap(width, height, Bitmap.Config.RGB_565);
-        Log.d("newpaint", "paintpaint " + map.getPolygons().size() );
+
         Canvas canvas = new Canvas(bmp);
 
         // Fill in map background
@@ -118,9 +118,9 @@ public class MapRenderer {
                 linePaint.setStrokeCap(Paint.Cap.ROUND);
                 break;
             case ROUTE_PATH:
-                linePaint.setColor(Color.argb(100,219,113,9));
+                linePaint.setColor(Color.argb(100,181,15,242));
                 linePaint.setStyle(Paint.Style.STROKE);
-                linePaint.setStrokeWidth(23);
+                linePaint.setStrokeWidth(8);
                 linePaint.setStrokeCap(Paint.Cap.ROUND);
                 break;
             case BUILDING:
