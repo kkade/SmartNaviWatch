@@ -90,4 +90,37 @@ public class MapPolygon implements Serializable, Comparable<MapPolygon>{
     public int compareTo(MapPolygon another) {
         return -Integer.compare(this.type.ordinal(), another.type.ordinal());
     }
+
+    public long getShortestDistanceSquaredToPoint(PolygonPoint p) {
+        long currentFoundDistanceSquared = Long.MAX_VALUE;
+        for(PolygonPoint cp : outerBounds) {
+            long dx = Math.abs(cp.x - p.x);
+            long dy = Math.abs(cp.y - p.y);
+            long distanceSquared = safeAdd(safeMul(dx,dx), safeMul(dy , dy));
+            if (currentFoundDistanceSquared > distanceSquared) {
+                currentFoundDistanceSquared = distanceSquared;
+            }
+        }
+        return currentFoundDistanceSquared;
+    }
+
+    private long safeMul(long a, long b)
+    {
+        // Overflow
+        if (a != 0 && b > Long.MAX_VALUE / a) {
+            return Long.MAX_VALUE;
+        }
+        else {
+            return a*b;
+        }
+    }
+
+    private long safeAdd(long a, long b) {
+        if (a > Long.MAX_VALUE - b) {
+            return Long.MAX_VALUE;
+        }
+        else {
+            return a+b;
+        }
+    }
 }

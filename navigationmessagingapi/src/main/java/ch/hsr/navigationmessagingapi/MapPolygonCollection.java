@@ -1,5 +1,7 @@
 package ch.hsr.navigationmessagingapi;
 
+import android.util.Log;
+
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
@@ -112,4 +114,19 @@ public class MapPolygonCollection implements Serializable {
         return polygons;
     }
 
+    public String getLocationName() {
+        long minDistanceSquared = Long.MAX_VALUE;
+        String foundName = "";
+        for(MapPolygon p : polygons) {
+            if (p.getName() != null && !p.getName().equals("")) {
+                long distSquared = p.getShortestDistanceSquaredToPoint(userPosition);
+
+                if (minDistanceSquared > distSquared) {
+                    minDistanceSquared = distSquared;
+                    foundName = p.getName();
+                }
+            }
+        }
+        return foundName;
+    }
 }

@@ -10,4 +10,5 @@ public final class MessageDataKeys {
     public static final String StreetName = "S";
     public static final String RouteProgressPercentage = "P";
     public static final String MapPolygonData = "M";
+    public static final String LocationName = "L";
 }
