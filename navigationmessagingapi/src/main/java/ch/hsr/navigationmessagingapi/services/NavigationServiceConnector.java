@@ -125,6 +125,8 @@ public class NavigationServiceConnector implements ServiceConnection {
     }
 
     private void sendAndForget(Message m) {
+        if (outgoingMessages == null) return;
+
         try {
             outgoingMessages.send(m);
         } catch (RemoteException e) {} // we don't really care if every single message is sent out
