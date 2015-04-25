@@ -25,6 +25,8 @@ public class MapRenderer {
         backgroundPaint.setColor(Color.rgb(240, 237, 229));
         canvas.drawRect(0,0,width, height, backgroundPaint);
 
+        if(map == null || map.getBottomRightViewRange() == null || map.getTopLeftViewRange() == null) return bmp;
+
         // Determine uniform scaling based on smaller view size
         float deltaX = map.getBottomRightViewRange().x - map.getTopLeftViewRange().x ;
         float deltaY = map.getBottomRightViewRange().y - map.getTopLeftViewRange().y;

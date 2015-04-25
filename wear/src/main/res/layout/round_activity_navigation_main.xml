@@ -12,7 +12,7 @@
 
     <TextView
         android:layout_width="match_parent"
-        android:layout_height="50dp"
+        android:layout_height="0dp"
         android:id="@+id/progressIndicator"
         android:background="@color/green"
         android:layout_row="0"

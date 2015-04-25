@@ -12,7 +12,7 @@
 
     <TextView
         android:layout_width="match_parent"
-        android:layout_height="50dp"
+        android:layout_height="0dp"
         android:id="@+id/progressIndicator"
         android:background="@color/green"
         android:layout_row="0"
@@ -29,6 +29,7 @@
         android:layout_margin="3dp">
 
         <GridLayout
+            android:id="@+id/first"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:columnCount="2"
@@ -83,6 +84,7 @@
 
         </GridLayout>
         <GridLayout
+            android:id="@+id/second"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:columnCount="2"
@@ -124,7 +126,7 @@
                 android:textColor="@color/black" />
 
             <TextView
-                android:id="@+id/textView0"
+                android:id="@+id/currentNavPosition"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_column="1"
@@ -146,18 +148,18 @@
                 android:textColor="@color/black" />
 
             <ImageView
-                android:id="@+id/imageView3"
+                android:id="@+id/directionImage"
                 android:layout_width="52dp"
                 android:layout_height="52dp"
                 android:layout_column="0"
                 android:layout_marginTop="18dp"
                 android:layout_row="4"
                 android:layout_rowSpan="2"
-                android:contentDescription="Turn right"
+                android:contentDescription="Direction"
                 android:src="@mipmap/turn_right" />
 
             <TextView
-                android:id="@+id/textView9"
+                android:id="@+id/directionMessage"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:layout_column="1"
@@ -170,7 +172,7 @@
                 android:textColor="@color/black" />
 
             <TextView
-                android:id="@+id/textView6"
+                android:id="@+id/distance"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_column="1"
