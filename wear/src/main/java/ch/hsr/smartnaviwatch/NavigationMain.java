@@ -96,7 +96,7 @@ public class NavigationMain extends Activity implements IMessageListener {
 
                             HashMap<String, Object> values = (HashMap<String, Object>) message.getPayload();
 
-                            currentPosition.setText((String) values.get(MessageDataKeys.StreetName));
+                            currentPosition.setText((String) values.get(MessageDataKeys.LocationName));
                             setBackgroundMap((MapPolygonCollection) values.get(MessageDataKeys.MapPolygonData));
                             setProgressBar(0);
                         }
@@ -142,8 +142,6 @@ public class NavigationMain extends Activity implements IMessageListener {
         stub.setOnLayoutInflatedListener(new WatchViewStub.OnLayoutInflatedListener() {
             @Override
             public void onLayoutInflated(WatchViewStub stub) {
-                messageReceived(initialMessage);
-
                 currentPosition = (TextView) stub.findViewById(R.id.currentPosition);
                 currentNavPosition = (TextView) stub.findViewById(R.id.currentNavPosition);
                 directionMessage = (TextView) stub.findViewById(R.id.directionMessage);
@@ -162,6 +160,10 @@ public class NavigationMain extends Activity implements IMessageListener {
                             sendTestMessage();
                         }
                     });
+                }
+                else
+                {
+                    messageReceived(initialMessage);
                 }
             }
         });
