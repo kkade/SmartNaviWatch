@@ -1,6 +1,7 @@
 <resources>
     <string name="app_name">SmartNaviWatch</string>
 
-    <string name="hello_world">Hello world!</string>
+    <string name="intro">SmartNaviWatch ist ein OsmAnd-Plugin und bietet dir die Möglichkeit, deine Navigationsinformationen auf einer verbundenen Smartwatch zu verfolgen.</string>
+    <string name="instruction">Um es zu verwenden, verbinde eine Smartwatch und starte die OsmAnd-App.</string>
     <string name="action_settings">Settings</string>
 </resources>

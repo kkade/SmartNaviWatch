@@ -36,11 +36,9 @@ public class NavigationMain extends Activity implements IMessageListener {
     private ImageView directionImage;
     private Animation slide_in_left, slide_out_right;
     private TextView currentPosition;
-    private TextView currentNavPosition;
     private TextView directionMessage;
     private TextView distance;
     private TextView progressIndicator;
-    private GridLayout layoutMap;
     private MessageEndPoint endPoint;
     private DisplayMetrics displayMetrics;
 
@@ -143,7 +141,6 @@ public class NavigationMain extends Activity implements IMessageListener {
             @Override
             public void onLayoutInflated(WatchViewStub stub) {
                 currentPosition = (TextView) stub.findViewById(R.id.currentPosition);
-                currentNavPosition = (TextView) stub.findViewById(R.id.currentNavPosition);
                 directionMessage = (TextView) stub.findViewById(R.id.directionMessage);
                 distance = (TextView) stub.findViewById(R.id.distance);
                 progressIndicator = (TextView) stub.findViewById(R.id.progressIndicator);
