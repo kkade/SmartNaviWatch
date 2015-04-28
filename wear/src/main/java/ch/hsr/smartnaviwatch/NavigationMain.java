@@ -59,6 +59,8 @@ public class NavigationMain extends Activity implements IMessageListener {
                             setDirectionImage((String) values.get(MessageDataKeys.TurnType));
                             //currentNavPosition.setText((String) values.get(MessageDataKeys.LocationName));
                             directionMessage.setText((String) values.get(MessageDataKeys.RoutingDescription));
+
+                            Vibrate(new long[]{0, 300, 50, 300});
                         }
                     });
                     break;
@@ -77,6 +79,8 @@ public class NavigationMain extends Activity implements IMessageListener {
                             setDirectionImage((String) values.get(MessageDataKeys.TurnType));
                             //currentNavPosition.setText((String) values.get(MessageDataKeys.LocationName));
                             directionMessage.setText((String) values.get(MessageDataKeys.RoutingDescription));
+
+                            Vibrate(new long[]{0, 300});
                         }
                     });
                     break;
@@ -162,18 +166,18 @@ public class NavigationMain extends Activity implements IMessageListener {
         });
         endPoint = new MessageEndPoint(getApplicationContext());
         endPoint.addMessageListener(this);
-
-        //Vibrator vibrator = (Vibrator) getSystemService(VIBRATOR_SERVICE);
-        //long[] vibrationPattern = {0, 500, 50, 300};
-        //-1 - don't repeat
-        //final int indexInPatternToRepeat = -1;
-        //vibrator.vibrate(vibrationPattern, indexInPatternToRepeat);
-
     }
 
     public void sendTestMessage() {
         NavigationMessage msg = NavigationMessage.create(MessageTypes.PositionRequest, new Integer(1));
         endPoint.sendMessage(msg);
+    }
+
+    private void Vibrate(long[] vibrationPattern) {
+        Vibrator vibrator = (Vibrator) getSystemService(VIBRATOR_SERVICE);
+        //-1 - don't repeat
+        final int indexInPatternToRepeat = -1;
+        vibrator.vibrate(vibrationPattern, indexInPatternToRepeat);
     }
 
     private void setBackgroundMap(MapPolygonCollection mapData) {
