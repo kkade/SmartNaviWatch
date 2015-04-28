@@ -8,6 +8,8 @@ import java.io.ObjectOutputStream;
 import java.io.Serializable;
 
 public class NavigationMessage implements Serializable{
+    private static final long serialVersionUID = 1L;
+
     protected String messageType;
 
     private NavigationMessage() {}

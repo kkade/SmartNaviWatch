@@ -37,7 +37,6 @@ public class NavigationMain extends Activity implements IMessageListener {
     private Animation slide_in_left, slide_out_right;
     private TextView currentPosition;
     private TextView directionMessage;
-    private TextView distance;
     private TextView progressIndicator;
     private MessageEndPoint endPoint;
     private DisplayMetrics displayMetrics;
@@ -59,8 +58,7 @@ public class NavigationMain extends Activity implements IMessageListener {
                             setProgressBar((double) values.get(MessageDataKeys.RouteProgressPercentage));
                             setDirectionImage((String) values.get(MessageDataKeys.TurnType));
                             //currentNavPosition.setText((String) values.get(MessageDataKeys.LocationName));
-                            directionMessage.setText((String) values.get(MessageDataKeys.StreetName));
-                            distance.setText(Integer.toString((int)values.get(MessageDataKeys.Distance)) + " m");
+                            directionMessage.setText((String) values.get(MessageDataKeys.RoutingDescription));
                         }
                     });
                     break;
@@ -78,8 +76,7 @@ public class NavigationMain extends Activity implements IMessageListener {
                             setProgressBar((double) values.get(MessageDataKeys.RouteProgressPercentage));
                             setDirectionImage((String) values.get(MessageDataKeys.TurnType));
                             //currentNavPosition.setText((String) values.get(MessageDataKeys.LocationName));
-                            directionMessage.setText((String) values.get(MessageDataKeys.StreetName));
-                            distance.setText(Integer.toString((int)values.get(MessageDataKeys.Distance)) + " m");
+                            directionMessage.setText((String) values.get(MessageDataKeys.RoutingDescription));
                         }
                     });
                     break;
@@ -142,7 +139,6 @@ public class NavigationMain extends Activity implements IMessageListener {
             public void onLayoutInflated(WatchViewStub stub) {
                 currentPosition = (TextView) stub.findViewById(R.id.currentPosition);
                 directionMessage = (TextView) stub.findViewById(R.id.directionMessage);
-                distance = (TextView) stub.findViewById(R.id.distance);
                 progressIndicator = (TextView) stub.findViewById(R.id.progressIndicator);
                 viewFlipper = (ViewFlipper) stub.findViewById(R.id.viewFlipper);
                 directionImage = (ImageView) stub.findViewById(R.id.directionImage);

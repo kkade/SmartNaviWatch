@@ -6,6 +6,8 @@ import java.io.Serializable;
  * Represents a polygon on the map
  */
 public class MapPolygon implements Serializable, Comparable<MapPolygon>{
+    private static final long serialVersionUID = 1L;
+
     private MapPolygonTypes type;
     private PolygonPoint[]   outerBounds;
     private PolygonPoint[][] innerBounds;

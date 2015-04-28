@@ -10,6 +10,8 @@ import java.util.List;
  * Represents a list of polygons on the map
  */
 public class MapPolygonCollection implements Serializable {
+    private static final long serialVersionUID = 1L;
+
     private List<MapPolygon> polygons = new ArrayList<MapPolygon>();
 
     private int outerXMin = Integer.MAX_VALUE;
