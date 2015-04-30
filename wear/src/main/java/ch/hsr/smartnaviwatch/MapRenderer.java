@@ -22,7 +22,7 @@ public class MapRenderer {
 
         // Fill in map background
         Paint backgroundPaint = new Paint();
-        backgroundPaint.setColor(Color.rgb(240, 237, 229));
+        backgroundPaint.setColor(Color.rgb(233, 229, 220));
         canvas.drawRect(0,0,width, height, backgroundPaint);
 
         if(map == null || map.getBottomRightViewRange() == null || map.getTopLeftViewRange() == null) return bmp;
@@ -92,41 +92,41 @@ public class MapRenderer {
             case ROAD_DEFAULT:
                 linePaint.setColor(Color.WHITE);
                 linePaint.setStyle(Paint.Style.STROKE);
-                linePaint.setStrokeWidth(5);
+                linePaint.setStrokeWidth(12);
                 linePaint.setStrokeCap(Paint.Cap.ROUND);
                 break;
             case ROAD_TERTIARY:
                 linePaint.setColor(Color.LTGRAY);
                 linePaint.setStyle(Paint.Style.STROKE);
-                linePaint.setStrokeWidth(6);
+                linePaint.setStrokeWidth(10);
                 linePaint.setStrokeCap(Paint.Cap.ROUND);
                 break;
             case ROAD_SECONDARY:
-                linePaint.setColor(Color.rgb(219,167,9));
+                linePaint.setColor(Color.rgb(239,192,49));
                 linePaint.setStyle(Paint.Style.STROKE);
-                linePaint.setStrokeWidth(10);
+                linePaint.setStrokeWidth(15);
                 linePaint.setStrokeCap(Paint.Cap.ROUND);
                 break;
             case ROAD_PRIMARY:
                 linePaint.setColor(Color.rgb(219,212,9));
                 linePaint.setStyle(Paint.Style.STROKE);
-                linePaint.setStrokeWidth(18);
+                linePaint.setStrokeWidth(20);
                 linePaint.setStrokeCap(Paint.Cap.ROUND);
                 break;
             case ROAD_MOTORWAY:
                 linePaint.setColor(Color.rgb(219,113,9));
                 linePaint.setStyle(Paint.Style.STROKE);
-                linePaint.setStrokeWidth(20);
+                linePaint.setStrokeWidth(22);
                 linePaint.setStrokeCap(Paint.Cap.ROUND);
                 break;
             case ROUTE_PATH:
-                linePaint.setColor(Color.argb(100,181,15,242));
+                linePaint.setColor(Color.argb(200,255,0,0));
                 linePaint.setStyle(Paint.Style.STROKE);
                 linePaint.setStrokeWidth(8);
                 linePaint.setStrokeCap(Paint.Cap.ROUND);
                 break;
             case BUILDING:
-                linePaint.setColor(Color.rgb(100,100,80));
+                linePaint.setColor(Color.rgb(146,136,127));
                 linePaint.setStyle(Paint.Style.FILL);
                 break;
             case WATER:
