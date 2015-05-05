@@ -1,5 +1,6 @@
 package ch.hsr.smartnaviwatch;
 
+import android.app.ActionBar;
 import android.app.Activity;
 import android.graphics.Color;
 import android.graphics.Point;
@@ -16,6 +17,7 @@ import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.GridLayout;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.ViewFlipper;
 
@@ -37,9 +39,9 @@ public class NavigationMain extends Activity implements IMessageListener {
     private Animation slide_in_left, slide_out_right;
     private TextView currentPosition;
     private TextView directionMessage;
-    private TextView progressIndicator;
     private MessageEndPoint endPoint;
     private DisplayMetrics displayMetrics;
+    private ProgressBar progressBar;
 
     @Override
     public void messageReceived(final NavigationMessage message) {
@@ -55,7 +57,6 @@ public class NavigationMain extends Activity implements IMessageListener {
 
                             HashMap<String, Object> values = (HashMap<String, Object>) message.getPayload();
                             setBackgroundMap((MapPolygonCollection) values.get(MessageDataKeys.MapPolygonData));
-                            setProgressBar((double) values.get(MessageDataKeys.RouteProgressPercentage));
                             setDirectionImage((String) values.get(MessageDataKeys.TurnType));
                             //currentNavPosition.setText((String) values.get(MessageDataKeys.LocationName));
                             directionMessage.setText((String) values.get(MessageDataKeys.RoutingDescription));
@@ -75,7 +76,6 @@ public class NavigationMain extends Activity implements IMessageListener {
 
                             HashMap<String, Object> values = (HashMap<String, Object>) message.getPayload();
                             setBackgroundMap((MapPolygonCollection) values.get(MessageDataKeys.MapPolygonData));
-                            setProgressBar((double) values.get(MessageDataKeys.RouteProgressPercentage));
                             setDirectionImage((String) values.get(MessageDataKeys.TurnType));
                             //currentNavPosition.setText((String) values.get(MessageDataKeys.LocationName));
                             directionMessage.setText((String) values.get(MessageDataKeys.RoutingDescription));
@@ -97,7 +97,6 @@ public class NavigationMain extends Activity implements IMessageListener {
 
                             currentPosition.setText((String) values.get(MessageDataKeys.LocationName));
                             setBackgroundMap((MapPolygonCollection) values.get(MessageDataKeys.MapPolygonData));
-                            setProgressBar(0);
                         }
                     });
                     break;
@@ -111,14 +110,13 @@ public class NavigationMain extends Activity implements IMessageListener {
                             }
 
                             viewFlipper.setBackgroundColor(Color.GRAY);
-                            setProgressBar(0);
                         }
                     });
                     break;
                 default:
-
-
             }
+
+            progressBar.setVisibility(View.GONE);
         }
     }
 
@@ -143,9 +141,11 @@ public class NavigationMain extends Activity implements IMessageListener {
             public void onLayoutInflated(WatchViewStub stub) {
                 currentPosition = (TextView) stub.findViewById(R.id.currentPosition);
                 directionMessage = (TextView) stub.findViewById(R.id.directionMessage);
-                progressIndicator = (TextView) stub.findViewById(R.id.progressIndicator);
                 viewFlipper = (ViewFlipper) stub.findViewById(R.id.viewFlipper);
                 directionImage = (ImageView) stub.findViewById(R.id.directionImage);
+                progressBar = (ProgressBar) stub.findViewById(R.id.progressBar);
+
+                progressBar.setVisibility(View.VISIBLE);
 
                 viewFlipper.setInAnimation(slide_in_left);
                 viewFlipper.setOutAnimation(slide_out_right);
@@ -173,6 +173,14 @@ public class NavigationMain extends Activity implements IMessageListener {
         endPoint.sendMessage(msg);
     }
 
+    public void handleCard(View v){
+        if (v.getBackground().getAlpha() < 255) {
+            v.getBackground().setAlpha(255);
+        } else {
+            v.getBackground().setAlpha(100);
+        }
+    }
+
     private void Vibrate(long[] vibrationPattern) {
         Vibrator vibrator = (Vibrator) getSystemService(VIBRATOR_SERVICE);
         //-1 - don't repeat
@@ -185,10 +193,6 @@ public class NavigationMain extends Activity implements IMessageListener {
         Point size = new Point();
         display.getSize(size);
         viewFlipper.setBackground(new BitmapDrawable(getResources(), MapRenderer.render(mapData, size.x, size.y)));
-    }
-
-    private void setProgressBar(double progressInPrecentage) {
-        progressIndicator.setHeight(displayMetrics.heightPixels / 100 * (int)Math.round(progressInPrecentage));
     }
 
     private void setDirectionImage(String directionType) {

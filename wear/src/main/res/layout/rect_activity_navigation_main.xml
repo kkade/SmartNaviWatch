@@ -10,78 +10,98 @@
     android:rowCount="3"
     android:columnCount="3">
 
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:id="@+id/progressIndicator"
-        android:background="@color/green"
-        android:layout_row="0"
-        android:layout_column="0"
-        android:layout_gravity="bottom" />
-
     <ViewFlipper
         android:id="@+id/viewFlipper"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_row="0"
         android:layout_column="0"
-        android:background="@drawable/blurred_map"
-        android:layout_margin="3dp">
+        android:background="@drawable/blurred_map">
 
-        <GridLayout
+        <android.support.wearable.view.CardFrame
             android:id="@+id/first"
-            android:layout_width="match_parent"
-            android:layout_height="60dp"
-            android:columnCount="1"
-            android:rowCount="2"
-            android:weightSum="1"
-            android:background="@color/white">
-
-            <TextView
-                android:id="@+id/currentPosition"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_row="1"
-                android:layout_gravity="center_horizontal"
-                android:layout_marginLeft="3dp"
-                android:layout_marginRight="3dp"
-                android:text="Sample St. akjldfj asjdfk jklasdjf lkasjd"
-                android:textSize="15sp"
-                android:textColor="@color/black" />
-
-        </GridLayout>
-        <GridLayout
-            android:id="@+id/second"
-            android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_width="fill_parent"
             android:layout_gravity="bottom"
-            android:columnCount="2"
-            android:rowCount="1"
-            android:background="@color/white">
+            android:onClick="handleCard">
 
-            <TextView
-                android:id="@+id/directionMessage"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Rechts abbiegen auf Dummy St."
-                android:textAppearance="?android:attr/textAppearanceSmall"
-                android:textColor="@color/black"
-                android:layout_row="0"
-                android:layout_column="1"
-                android:layout_marginRight="47dp"
-                android:layout_marginTop="5dp"/>
+            <GridLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:columnCount="1"
+                android:rowCount="1">
 
-            <ImageView
-                android:id="@+id/directionImage"
-                android:layout_width="45dp"
-                android:layout_height="45dp"
-                android:layout_column="0"
-                android:contentDescription="Direction"
-                android:src="@mipmap/turn_right"
-                android:layout_row="0" />
+                <TextView
+                    android:id="@+id/currentPosition"
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent"
+                    android:layout_row="0"
+                    android:gravity="center_horizontal"
+                    android:text="Sample St."
+                    android:textSize="15dp"
+                    android:textColor="@color/black" />
 
-        </GridLayout>
+            </GridLayout>
+        </android.support.wearable.view.CardFrame>
+
+        <android.support.wearable.view.CardFrame
+            android:id="@+id/second"
+            android:layout_height="wrap_content"
+            android:layout_width="fill_parent"
+            android:layout_gravity="bottom"
+            android:onClick="handleCard">
+
+            <GridLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:columnCount="2"
+                android:rowCount="1">
+
+                <TextView
+                    android:id="@+id/directionMessage"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Rechts abbiegen auf Dummy St."
+                    android:textAppearance="?android:attr/textAppearanceSmall"
+                    android:textColor="@color/black"
+                    android:layout_row="0"
+                    android:layout_column="1"
+                    android:layout_marginRight="35dp" />
+
+                <ImageView
+                    android:id="@+id/directionImage"
+                    android:layout_width="45dp"
+                    android:layout_height="45dp"
+                    android:layout_column="0"
+                    android:contentDescription="Direction"
+                    android:src="@mipmap/turn_right"
+                    android:layout_row="0"
+                    android:layout_marginLeft="-7dp"/>
+
+            </GridLayout>
+        </android.support.wearable.view.CardFrame>
     </ViewFlipper>
+
+    <ImageView
+        android:layout_width="10dp"
+        android:layout_height="10dp"
+        android:id="@+id/imageView"
+        android:layout_row="0"
+        android:layout_column="0"
+        android:src="@drawable/circle"
+        android:layout_gravity="center" />
+
+    <ProgressBar
+        style="?android:attr/progressBarStyleLarge"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:id="@+id/progressBar"
+        android:layout_row="0"
+        android:layout_column="0"
+        android:background="@color/white"
+        android:padding="20dp"
+        android:visibility="gone" />
+
     <TextClock
         android:id="@+id/textClock"
         android:layout_width="wrap_content"
@@ -89,8 +109,9 @@
         android:layout_gravity="center_horizontal"
         android:layout_marginTop="5dp"
         android:textColor="@color/black"
-        android:textSize="14sp"
+        android:textSize="16sp"
         android:layout_row="0"
-        android:layout_column="0" />
+        android:layout_column="0"
+        android:textStyle="bold" />
 </GridLayout>
 
