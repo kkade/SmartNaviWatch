@@ -1,6 +1,5 @@
 package ch.hsr.smartnaviwatch;
 
-import android.app.ActionBar;
 import android.app.Activity;
 import android.graphics.Color;
 import android.graphics.Point;
@@ -9,13 +8,10 @@ import android.os.Bundle;
 import android.os.Vibrator;
 import android.support.wearable.view.WatchViewStub;
 import android.util.DisplayMetrics;
-import android.util.Log;
 import android.view.Display;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
-import android.widget.Button;
-import android.widget.GridLayout;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;

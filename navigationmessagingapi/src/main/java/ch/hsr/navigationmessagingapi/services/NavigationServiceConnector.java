@@ -11,7 +11,6 @@ import android.os.IBinder;
 import android.os.Message;
 import android.os.Messenger;
 import android.os.RemoteException;
-import android.util.Log;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -77,7 +76,6 @@ public class NavigationServiceConnector implements ServiceConnection {
         listeners = new ArrayList<IMessageListener>();
 
         // look for service and bind it
-        // TODO: Error message if service not found
         Intent serviceIntent = new Intent();
         serviceIntent.setComponent(new ComponentName("ch.hsr.smartnaviwatch", "ch.hsr.smartnaviwatch.NavigationMessagingService"));
 

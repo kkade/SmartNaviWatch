@@ -6,7 +6,6 @@ import android.graphics.Color;
 import android.graphics.DashPathEffect;
 import android.graphics.Paint;
 import android.graphics.Path;
-import android.util.Log;
 
 import ch.hsr.navigationmessagingapi.MapPolygon;
 import ch.hsr.navigationmessagingapi.MapPolygonCollection;
