@@ -85,11 +85,36 @@
     <ImageView
         android:layout_width="10dp"
         android:layout_height="10dp"
-        android:id="@+id/imageView"
+        android:id="@+id/locationMarkerSmall"
         android:layout_row="0"
         android:layout_column="0"
         android:src="@drawable/circle"
-        android:layout_gravity="center" />
+        android:layout_gravity="center"
+        android:visibility="invisible" />
+
+    <ImageView
+        android:layout_width="20dp"
+        android:layout_height="20dp"
+        android:id="@+id/locationMarkerBig"
+        android:layout_row="0"
+        android:layout_column="0"
+        android:src="@drawable/circle_big"
+        android:layout_gravity="center"
+        android:visibility="invisible" />
+
+    <TextView
+        android:id="@+id/leftTime"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="25dp"
+        android:textColor="@color/black"
+        android:textSize="16sp"
+        android:text="~20 min"
+        android:layout_row="0"
+        android:layout_column="0"
+        android:textStyle="bold"
+        android:visibility="invisible" />
 
     <ProgressBar
         style="?android:attr/progressBarStyleLarge"

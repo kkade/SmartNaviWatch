@@ -35,9 +35,12 @@ public class NavigationMain extends Activity implements IMessageListener {
     private Animation slide_in_left, slide_out_right;
     private TextView currentPosition;
     private TextView directionMessage;
+    private TextView leftTime;
     private MessageEndPoint endPoint;
     private DisplayMetrics displayMetrics;
     private ProgressBar progressBar;
+    private ImageView locationMarkerSmall;
+    private ImageView locationMarkerBig;
 
     @Override
     public void messageReceived(final NavigationMessage message) {
@@ -54,8 +57,18 @@ public class NavigationMain extends Activity implements IMessageListener {
                             HashMap<String, Object> values = (HashMap<String, Object>) message.getPayload();
                             setBackgroundMap((MapPolygonCollection) values.get(MessageDataKeys.MapPolygonData));
                             setDirectionImage((String) values.get(MessageDataKeys.TurnType));
-                            //currentNavPosition.setText((String) values.get(MessageDataKeys.LocationName));
                             directionMessage.setText((String) values.get(MessageDataKeys.RoutingDescription));
+                            leftTime.setText(intToStringTimeFormat((int) values.get(MessageDataKeys.RouteLeftTime)));
+                            leftTime.setVisibility(View.VISIBLE);
+
+                            float accuracy = (float)values.get(MessageDataKeys.LocationAccuracy);
+                            if (accuracy <= 20) {
+                                locationMarkerSmall.setVisibility(View.VISIBLE);
+                                locationMarkerBig.setVisibility(View.INVISIBLE);
+                            } else {
+                                locationMarkerSmall.setVisibility(View.INVISIBLE);
+                                locationMarkerBig.setVisibility(View.VISIBLE);
+                            }
 
                             Vibrate(new long[]{0, 300, 50, 300});
                         }
@@ -73,8 +86,18 @@ public class NavigationMain extends Activity implements IMessageListener {
                             HashMap<String, Object> values = (HashMap<String, Object>) message.getPayload();
                             setBackgroundMap((MapPolygonCollection) values.get(MessageDataKeys.MapPolygonData));
                             setDirectionImage((String) values.get(MessageDataKeys.TurnType));
-                            //currentNavPosition.setText((String) values.get(MessageDataKeys.LocationName));
                             directionMessage.setText((String) values.get(MessageDataKeys.RoutingDescription));
+                            leftTime.setText(intToStringTimeFormat ((int) values.get(MessageDataKeys.RouteLeftTime)));
+                            leftTime.setVisibility(View.VISIBLE);
+
+                            float accuracy = (float)values.get(MessageDataKeys.LocationAccuracy);
+                            if (accuracy <= 20) {
+                                locationMarkerSmall.setVisibility(View.VISIBLE);
+                                locationMarkerBig.setVisibility(View.INVISIBLE);
+                            } else {
+                                locationMarkerSmall.setVisibility(View.INVISIBLE);
+                                locationMarkerBig.setVisibility(View.VISIBLE);
+                            }
 
                             Vibrate(new long[]{0, 300});
                         }
@@ -90,9 +113,18 @@ public class NavigationMain extends Activity implements IMessageListener {
                             }
 
                             HashMap<String, Object> values = (HashMap<String, Object>) message.getPayload();
-
                             currentPosition.setText((String) values.get(MessageDataKeys.LocationName));
                             setBackgroundMap((MapPolygonCollection) values.get(MessageDataKeys.MapPolygonData));
+                            leftTime.setVisibility(View.INVISIBLE);
+
+                            float accuracy = (float)values.get(MessageDataKeys.LocationAccuracy);
+                            if (accuracy <= 20) {
+                                locationMarkerSmall.setVisibility(View.VISIBLE);
+                                locationMarkerBig.setVisibility(View.INVISIBLE);
+                            } else {
+                                locationMarkerSmall.setVisibility(View.INVISIBLE);
+                                locationMarkerBig.setVisibility(View.VISIBLE);
+                            }
                         }
                     });
                     break;
@@ -140,6 +172,9 @@ public class NavigationMain extends Activity implements IMessageListener {
                 viewFlipper = (ViewFlipper) stub.findViewById(R.id.viewFlipper);
                 directionImage = (ImageView) stub.findViewById(R.id.directionImage);
                 progressBar = (ProgressBar) stub.findViewById(R.id.progressBar);
+                leftTime = (TextView) stub.findViewById(R.id.leftTime);
+                locationMarkerSmall = (ImageView)stub.findViewById(R.id.locationMarkerSmall);
+                locationMarkerBig = (ImageView)stub.findViewById(R.id.locationMarkerBig);
 
                 progressBar.setVisibility(View.VISIBLE);
 
@@ -220,5 +255,27 @@ public class NavigationMain extends Activity implements IMessageListener {
             directionImage.setImageResource(R.mipmap.roundabout);
         else
             directionImage.setImageResource(android.R.color.transparent);
+    }
+
+    public String intToStringTimeFormat(int time)
+    {
+        String strTemp = new String();
+        int minutes = time / 60;
+        int hours = 0;
+
+        if (minutes >= 60){
+            hours = minutes / 60;
+            minutes = minutes - (hours * 60);
+        }
+
+        strTemp = "~";
+
+        if(hours > 0)
+            strTemp = strTemp + Integer.toString(hours) + " h ";
+
+        if (minutes > 0)
+            strTemp = strTemp + Integer.toString(minutes) + " min";
+
+        return strTemp;
     }
 }
