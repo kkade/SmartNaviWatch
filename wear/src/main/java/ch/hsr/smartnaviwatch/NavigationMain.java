@@ -39,6 +39,7 @@ public class NavigationMain extends Activity implements IMessageListener {
     private MessageEndPoint endPoint;
     private DisplayMetrics displayMetrics;
     private ProgressBar progressBar;
+    private TextView loadingMessage;
     private ImageView locationMarkerSmall;
     private ImageView locationMarkerBig;
 
@@ -145,6 +146,7 @@ public class NavigationMain extends Activity implements IMessageListener {
             }
 
             progressBar.setVisibility(View.GONE);
+            loadingMessage.setVisibility(View.GONE);
         }
     }
 
@@ -175,8 +177,10 @@ public class NavigationMain extends Activity implements IMessageListener {
                 leftTime = (TextView) stub.findViewById(R.id.leftTime);
                 locationMarkerSmall = (ImageView)stub.findViewById(R.id.locationMarkerSmall);
                 locationMarkerBig = (ImageView)stub.findViewById(R.id.locationMarkerBig);
+                loadingMessage = (TextView)stub.findViewById(R.id.loadingMessage);
 
                 progressBar.setVisibility(View.VISIBLE);
+                loadingMessage.setVisibility(View.VISIBLE);
 
                 viewFlipper.setInAnimation(slide_in_left);
                 viewFlipper.setOutAnimation(slide_out_right);
