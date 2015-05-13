@@ -12,6 +12,7 @@ import android.view.Display;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
+import android.widget.GridLayout;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
@@ -39,7 +40,7 @@ public class NavigationMain extends Activity implements IMessageListener {
     private MessageEndPoint endPoint;
     private DisplayMetrics displayMetrics;
     private ProgressBar progressBar;
-    private TextView loadingMessage;
+    private GridLayout loadingInfo;
     private ImageView locationMarkerSmall;
     private ImageView locationMarkerBig;
 
@@ -145,8 +146,7 @@ public class NavigationMain extends Activity implements IMessageListener {
                 default:
             }
 
-            progressBar.setVisibility(View.GONE);
-            loadingMessage.setVisibility(View.GONE);
+            loadingInfo.setVisibility(View.INVISIBLE);
         }
     }
 
@@ -177,10 +177,9 @@ public class NavigationMain extends Activity implements IMessageListener {
                 leftTime = (TextView) stub.findViewById(R.id.leftTime);
                 locationMarkerSmall = (ImageView)stub.findViewById(R.id.locationMarkerSmall);
                 locationMarkerBig = (ImageView)stub.findViewById(R.id.locationMarkerBig);
-                loadingMessage = (TextView)stub.findViewById(R.id.loadingMessage);
+                loadingInfo = (GridLayout)stub.findViewById(R.id.loadingInfo);
 
-                progressBar.setVisibility(View.VISIBLE);
-                loadingMessage.setVisibility(View.VISIBLE);
+                loadingInfo.setVisibility(View.VISIBLE);
 
                 viewFlipper.setInAnimation(slide_in_left);
                 viewFlipper.setOutAnimation(slide_out_right);
