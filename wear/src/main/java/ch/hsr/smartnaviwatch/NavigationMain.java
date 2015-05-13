@@ -173,7 +173,6 @@ public class NavigationMain extends Activity implements IMessageListener {
                 directionMessage = (TextView) stub.findViewById(R.id.directionMessage);
                 viewFlipper = (ViewFlipper) stub.findViewById(R.id.viewFlipper);
                 directionImage = (ImageView) stub.findViewById(R.id.directionImage);
-                progressBar = (ProgressBar) stub.findViewById(R.id.progressBar);
                 leftTime = (TextView) stub.findViewById(R.id.leftTime);
                 locationMarkerSmall = (ImageView)stub.findViewById(R.id.locationMarkerSmall);
                 locationMarkerBig = (ImageView)stub.findViewById(R.id.locationMarkerBig);
