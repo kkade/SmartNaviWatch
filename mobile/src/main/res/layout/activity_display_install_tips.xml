@@ -21,22 +21,14 @@
         android:layout_below="@+id/intro"
         android:layout_marginTop="20dp"/>
 
-    <Button
+    <TextView
+        android:text="@string/gitlink"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Osmand starten"
+        android:gravity="center"
+        android:textSize="20dp"
+        android:id="@+id/gitlink"
         android:layout_below="@+id/instruction"
-        android:layout_marginTop="67dp"
-        android:onClick="startOsmand" />
-
-    <Button
-        android:visibility="gone"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="New Button"
-        android:id="@+id/button"
-        android:layout_below="@+id/instruction"
-        android:layout_marginTop="67dp"
-        android:onClick="sendTestMessage"/>
+        android:layout_marginTop="20dp" />
 
 </RelativeLayout>
