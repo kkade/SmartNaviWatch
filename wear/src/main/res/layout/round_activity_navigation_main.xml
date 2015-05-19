@@ -83,8 +83,8 @@
     </ViewFlipper>
 
     <ImageView
-        android:layout_width="8dp"
-        android:layout_height="8dp"
+        android:layout_width="15dp"
+        android:layout_height="15dp"
         android:id="@+id/locationMarkerSmall"
         android:layout_row="0"
         android:layout_column="0"
@@ -93,8 +93,8 @@
         android:visibility="invisible" />
 
     <ImageView
-        android:layout_width="20dp"
-        android:layout_height="20dp"
+        android:layout_width="28dp"
+        android:layout_height="28dp"
         android:id="@+id/locationMarkerBig"
         android:layout_row="0"
         android:layout_column="0"
@@ -109,12 +109,17 @@
         android:layout_gravity="center_horizontal"
         android:layout_marginTop="25dp"
         android:textColor="@color/black"
-        android:textSize="16sp"
+        android:textSize="17sp"
         android:text="~1h 20 min"
         android:layout_row="0"
         android:layout_column="0"
         android:textStyle="bold"
-        android:visibility="invisible" />
+        android:visibility="invisible"
+        android:shadowColor="@color/white"
+        android:shadowDx="0"
+        android:shadowDy="0"
+        android:shadowRadius="1"
+        android:background="#46FFFFFF"/>
 
     <GridLayout
         android:layout_width="fill_parent"
@@ -153,10 +158,15 @@
         android:layout_gravity="center_horizontal"
         android:layout_marginTop="5dp"
         android:textColor="@color/black"
-        android:textSize="16sp"
+        android:textSize="17sp"
         android:layout_row="0"
         android:layout_column="0"
-        android:textStyle="bold" />
+        android:textStyle="bold"
+        android:shadowColor="@color/white"
+        android:shadowDx="0"
+        android:shadowDy="0"
+        android:shadowRadius="1"
+        android:background="#46FFFFFF"/>
 
 </GridLayout>
 

@@ -15,6 +15,7 @@ import android.view.animation.AnimationUtils;
 import android.widget.GridLayout;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
+import android.widget.TextClock;
 import android.widget.TextView;
 import android.widget.ViewFlipper;
 
