@@ -770,6 +770,13 @@ footer a:hover {
 * html .clearfix {height: 1%;}
 .clearfix {display: block;}
 
+img#hsrImage {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  height: 70px;
+}
+
 /* #Media Queries
 ================================================== */
 
