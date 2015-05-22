@@ -26,13 +26,13 @@ public class MessageEndPoint implements GoogleApiClient.ConnectionCallbacks
     private Node wearNode = null;
 
     public MessageEndPoint(Context context) {
+        connectionListeners = new ArrayList<IConnectionStateChanged>();
+        messageListeners = new ArrayList<IMessageListener>();
+
         messageApi = new GoogleApiClient.Builder(context).addApi(Wearable.API).build();
         messageApi.registerConnectionCallbacks(this);
         messageApi.registerConnectionFailedListener(this);
         messageApi.connect();
-
-        connectionListeners = new ArrayList<IConnectionStateChanged>();
-        messageListeners = new ArrayList<IMessageListener>();
     }
 
     public boolean isApiReady() {
