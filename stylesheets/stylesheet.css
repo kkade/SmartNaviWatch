@@ -878,6 +878,9 @@ img#hsrImage {
     margin-left: 0;
     content: none;
   }
+  img#hsrImage {
+    height: 50px;
+  }
 }
 
 /* Mobile Landscape Size to Tablet Portrait (devices and browsers) */
